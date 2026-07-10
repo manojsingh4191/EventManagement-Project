@@ -15,11 +15,33 @@ connectDB();
 const app = express();
 const PORT = process.env.PORT || 5000;
 const isProduction = process.env.NODE_ENV === 'production';
+
+
+const cors = require('cors');
+
 const allowedOrigins = [
-  process.env.CLIENT_URL,
-  'http://localhost:5173',
-  'http://127.0.0.1:5173',
-].filter(Boolean);
+  'https://event-management-project-j5q0gjmpc-adam4191416.vercel.app',
+  'https://event-management-project-git-main-adam4191416.vercel.app',
+  'http://localhost:3000' // Useful for local development
+];
+
+app.use(cors({
+  origin: function (origin, callback) {
+    // Allow requests with no origin (like mobile apps or curl)
+    if (!origin) return callback(null, true);
+    if (allowedOrigins.indexOf(origin) === -1) {
+      return callback(new Error('CORS policy violation'), false);
+    }
+    return callback(null, true);
+  }
+}));
+
+
+// const allowedOrigins = [
+//   process.env.CLIENT_URL,
+//   'http://localhost:5173',
+//   'http://127.0.0.1:5173',
+// ].filter(Boolean);
 
 // app.use(
 //   cors({
@@ -32,11 +54,8 @@ const allowedOrigins = [
 //     },
 //     credentials: true,
 //   })
-// );
-// Allow specific origin
-app.use(cors({
-  origin: 'https://event-management-project-git-main-adam4191416.vercel.app'
-}));
+// );  
+
 app.use(express.json());
 
 app.use('/api/auth', authRoutes);
