@@ -21,18 +21,22 @@ const allowedOrigins = [
   'http://127.0.0.1:5173',
 ].filter(Boolean);
 
-app.use(
-  cors({
-    origin(origin, callback) {
-      if (!origin || allowedOrigins.includes(origin)) {
-        return callback(null, true);
-      }
+// app.use(
+//   cors({
+//     origin(origin, callback) {
+//       if (!origin || allowedOrigins.includes(origin)) {
+//         return callback(null, true);
+//       }
 
-      return callback(new Error('Not allowed by CORS'));
-    },
-    credentials: true,
-  })
-);
+//       return callback(new Error('Not allowed by CORS'));
+//     },
+//     credentials: true,
+//   })
+// );
+// Allow specific origin
+app.use(cors({
+  origin: 'https://event-management-project-git-main-adam4191416.vercel.app'
+}));
 app.use(express.json());
 
 app.use('/api/auth', authRoutes);
