@@ -17,7 +17,6 @@ const PORT = process.env.PORT || 5000;
 const isProduction = process.env.NODE_ENV === 'production';
 
 
-const cors = require('cors');
 
 const allowedOrigins = [
   'https://event-management-project-j5q0gjmpc-adam4191416.vercel.app',
