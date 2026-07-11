@@ -19,7 +19,7 @@ const isProduction = process.env.NODE_ENV === 'production';
 
 
 const allowedOrigins = [
-  'https://event-management-project-j5q0gjmpc-adam4191416.vercel.app',
+  'https://event-management-project-nu.vercel.app',
   'https://event-management-project-git-main-adam4191416.vercel.app',
   'http://localhost:3000' // Useful for local development
 ];
