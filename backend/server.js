@@ -18,42 +18,42 @@ const isProduction = process.env.NODE_ENV === 'production';
 
 
 
-const allowedOrigins = [
-  'https://event-management-project-nu.vercel.app',
-  'https://event-management-project-git-main-adam4191416.vercel.app',
-  'http://localhost:3000' // Useful for local development
-];
-
-app.use(cors({
-  origin: function (origin, callback) {
-    // Allow requests with no origin (like mobile apps or curl)
-    if (!origin) return callback(null, true);
-    if (allowedOrigins.indexOf(origin) === -1) {
-      return callback(new Error('CORS policy violation'), false);
-    }
-    return callback(null, true);
-  }
-}));
-
-
 // const allowedOrigins = [
-//   process.env.CLIENT_URL,
-//   'http://localhost:5173',
-//   'http://127.0.0.1:5173',
-// ].filter(Boolean);
+//   'https://event-management-project-nu.vercel.app',
+//   'https://event-management-project-git-main-adam4191416.vercel.app',
+//   'http://localhost:3000' // Useful for local development
+// ];
 
-// app.use(
-//   cors({
-//     origin(origin, callback) {
-//       if (!origin || allowedOrigins.includes(origin)) {
-//         return callback(null, true);
-//       }
+// app.use(cors({
+//   origin: function (origin, callback) {
+//     // Allow requests with no origin (like mobile apps or curl)
+//     if (!origin) return callback(null, true);
+//     if (allowedOrigins.indexOf(origin) === -1) {
+//       return callback(new Error('CORS policy violation'), false);
+//     }
+//     return callback(null, true);
+//   }
+// }));
 
-//       return callback(new Error('Not allowed by CORS'));
-//     },
-//     credentials: true,
-//   })
-// );  
+
+const allowedOrigins = [
+  process.env.CLIENT_URL,
+  'https://event-management-project-git-main-adam4191416.vercel.app',
+  'http://127.0.0.1:5173',
+].filter(Boolean);
+
+app.use(
+  cors({
+    origin(origin, callback) {
+      if (!origin || allowedOrigins.includes(origin)) {
+        return callback(null, true);
+      }
+
+      return callback(new Error('Not allowed by CORS'));
+    },
+    credentials: true,
+  })
+);  
 
 app.use(express.json());
 
